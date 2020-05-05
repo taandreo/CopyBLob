@@ -18,13 +18,14 @@ if test -f /usr/bin/azcopy; then
     echo -n "Another executable \"azcopy\" was found in /usr/bin, do you want overwrite ? [Y/N] (Enter = Y): "
     read OPTION
     if test $OPTION = 'N'; then
+        rm -rf .tmp-azcopy/
         echo Exiting ... && exit 1
     elif test $OPTION != 'Y'; then
+        rm -rf .tmp-azcopy/
         echo Invalid Option, Exiting ... && exit 1
-    else
-        mv -f .tmp-azcopy/azcopy /usr/bin/azcopy
-        chown root:root /usr/bin/azcopy && chmod 755 /usr/bin/azcopy
-    fi
 fi
+
+mv -f .tmp-azcopy/azcopy /usr/bin/azcopy
+chown root:root /usr/bin/azcopy && chmod 755 /usr/bin/azcopy
 
 rm -rf .tmp-azcopy/
